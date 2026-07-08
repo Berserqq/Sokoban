@@ -4,6 +4,7 @@
 #include "../include/game.h"
 #include "../include/input.h"
 
+
 void render_level(Game *game){
     // printf("\e[1;1H\e[2J"); //clear/cls
 
@@ -20,5 +21,6 @@ void render_level(Game *game){
     printf("\n");
     printf("WASD - move\n");
     printf("F - last move\n");
-    printf("^C - quit\n");
+    printf("Q - back\n");
+
 }

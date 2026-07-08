@@ -39,16 +39,17 @@ char move_player(Game *game, int vector){
 
     switch (vector)
     {
-        case 1: dy = -1; break;
-        case 2: dx = -1; break;
-        case 3: dy = 1; break;
-        case 4: dx = 1; break;
+        case KEY_UP: dy = -1; break;
+        case KEY_LEFT: dx = -1; break;
+        case KEY_DOWN: dy = 1; break;
+        case KEY_RIGHT: dx = 1; break;
         default: return 0;
     }
 
     int new_x = game->player_x + dx;
     int new_y = game->player_y + dy;
 
+    //regactored by chat
     char *target = &game->level.cells[new_y][new_x];
     char *target_map = &game->level.map[new_y][new_x];
 
@@ -57,6 +58,7 @@ char move_player(Game *game, int vector){
 
     char *player = &game->level.cells[game->player_y][game->player_x];
     char *player_map = &game->level.map[game->player_y][game->player_x];
+    //refactored by chat
 
     if(*target == '#' || ((*target == '$' || *target == 'O') && (*next == '#' || *next == '$' || *next == 'O'))){
         return 0;

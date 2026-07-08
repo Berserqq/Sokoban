@@ -14,7 +14,9 @@ int level_load(Level *level, char *filename){
     level-> height = 0;
 
     while(fgets(line, sizeof(line),file)){
+        //chat
         line[strcspn(line, "\n")] = '\0';
+        //chat
 
         if(level->width < strlen(line))
             level->width = strlen(line);

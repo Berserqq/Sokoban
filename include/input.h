@@ -3,11 +3,17 @@
 #include <stdio.h>
 
 typedef enum{
-    DIRECTION_UP = 1,
-    DIRECTION_LEFT = 2,
-    DIRECTION_DOWN = 3,
-    DIRECTION_RIGHT = 4
+    KEY_UP,
+    KEY_DOWN,
+    KEY_LEFT,
+    KEY_RIGHT,
+    KEY_ENTER,
+    KEY_ESCAPE,
+    KEY_LAST_MOVE
 } Direction;
 
 int player_input(void);
+void input_init(void);
+void input_shutdown(void);
+
 #endif
