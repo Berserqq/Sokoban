@@ -13,9 +13,10 @@ typedef struct
     char previous_cells[MAX_HEIGHT][MAX_WIDTH];
     char map[MAX_HEIGHT][MAX_WIDTH];
     char name[MAX_LEVEL_NAME];
+
 } Level;
 
 
-int level_load(Level *level, char *filename);
+int level_load(Level *level, const char *filename);
 
 #endif

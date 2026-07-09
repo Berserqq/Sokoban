@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "../include/menu.h"
 #include "../include/level.h"
@@ -36,6 +37,7 @@ int get_levels(LevelEntry levels[]){
             break;
     }
     qsort(levels, count, sizeof(LevelEntry), compare_levels);
+    closedir(dir);
     return count;
 }
 
@@ -54,25 +56,21 @@ int compare_levels(const void *a, const void *b)
 }
 
 int select_level(LevelEntry levels[], int level_count){
-    while (1)
+
+    int key;
+    printf("\033[2J");
+    printf("\033[H");
+    printf("====== SELECT LEVEL ======\n\n");
+
+    for (int i = 0; i < level_count; i++)
     {
-        printf("\033[2J");
-        printf("\033[H");
-
-        printf("====== SELECT LEVEL ======\n\n");
-
-        for (int i = 0; i < level_count; i++)
-        {
-            printf("%d. %s\n",i+1, levels[i].name);
-        }
-
-        printf("\nW/S - Select\n");
-        printf("Enter - Play\n");
-        int key;
-        if (scanf("%d", &key) != 1) {
-            printf("Not a number!\n");
-        }
-        while (getchar() != '\n'); 
-        return key-1;
+        printf("%d. %s\n",i+1, levels[i].name);
     }
+
+    printf("\nW/S - Select\n");
+    printf("Enter - Play\n");
+
+    scanf("%d", &key);
+
+    return key-1;
 }

@@ -3,6 +3,6 @@
 
 #include "game.h"
 
-void render_level(Game *game);
+void render_level(Game *game, Counters *counters);
 
 #endif

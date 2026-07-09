@@ -2,11 +2,10 @@
 #include <string.h>
 #include "../include/level.h"
 
-int level_load(Level *level, char *filename){
+int level_load(Level *level, const char *filename){
     FILE *file = fopen(filename, "r");
 
     if (file == NULL) return 1;
-
 
     char line[MAX_WIDTH + 2]; //+2 cuz of special symbols like /n
 
@@ -14,14 +13,13 @@ int level_load(Level *level, char *filename){
     level-> height = 0;
 
     while(fgets(line, sizeof(line),file)){
-        //chat
         line[strcspn(line, "\n")] = '\0';
-        //chat
 
         if(level->width < strlen(line))
             level->width = strlen(line);
 
         for(int i = 0; i < level->width; i++){
+            
             level->cells[level->height][i] = line[i];
             level->map[level->height][i] = line[i];
         }
