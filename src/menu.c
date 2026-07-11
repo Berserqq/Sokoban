@@ -8,19 +8,7 @@
 #include "../include/game.h"
 #include "../include/render.h"
 
-int main_menu(){
-    // printf("1. Select level\n2. Quit\n");
-    // char select = getchar();
-    // switch (select)
-    // {
-    //     case '1': select_level(); break;
-    //     case '2': exit(0);
-    //     default: break;
-    // }
-}
-
-int select_level(MenuLevels levels[MAX_LEVELS]){
-    int level_count = get_levels(levels);
+int select_level(MenuLevels levels[MAX_LEVELS], int passed[MAX_LEVELS], int level_count){
 
     int key;
     int valid_input = 0;
@@ -32,7 +20,9 @@ int select_level(MenuLevels levels[MAX_LEVELS]){
 
         for (int i = 0; i < level_count; i++)
         {
-            printf("%d. %s\n",i+1, levels[i].name);
+            if(passed[i]) printf(ANSI_GREEN "%d. %s" ANSI_RESET,i+1, levels[i].name);
+            else printf("%d. %s",i+1, levels[i].name);
+            putchar('\n');
         }
         printf("\nChoose level number (1-%d)\n", level_count);
 

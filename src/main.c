@@ -5,27 +5,36 @@
 #include "../include/game.h"
 #include "../include/render.h"
 #include "../include/menu.h"
+#include "../include/save.h"
 
-void start_game(char level_path[MAX_LEVEL_PATH],MenuLevels levels[MAX_LEVEL_PATH]);
+void start_game(char level_path[MAX_LEVELS], Save *save);
 
 int main(){
-    MenuLevels levels[MAX_LEVEL_PATH];
+    
+    MenuLevels levels[MAX_LEVELS];
+    Save save[MAX_LEVELS];
+    int level_count = get_levels(levels);
+    
+    load_save(save, levels, level_count);
 
+    int passed[MAX_LEVELS];
     while (1)
     {
-        int selected = select_level(levels);
-
-        start_game(levels[selected].path, levels);
+        for(int i = 0; i < level_count; i++) passed[i] = (save[i].best_moves > 0) ? 1 : 0;
+        int selected = select_level(levels, passed, level_count);
+        strcpy(save[selected].level_name, levels[selected].name);
+        start_game(levels[selected].path, &save[selected]);
+        save_game(save);
     }
 }
 
-void start_game(char level_path[MAX_LEVEL_PATH],MenuLevels levels[MAX_LEVEL_PATH]){
+void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
     Game game;
     memset(&game, 0, sizeof(game));
     level_load(&game.level, level_path);
 
     input_init();
-    render_level(&game);
+    render_level(&game, -1);
     player_position(&game);
 
     while (game.level.total_crates > crates_on_targets(&game))
@@ -40,10 +49,15 @@ void start_game(char level_path[MAX_LEVEL_PATH],MenuLevels levels[MAX_LEVEL_PATH
             last_move(&game);
         }
         move_player(&game, key);
-        render_level(&game);
+        render_level(&game, key);
+        printf("%s\n", save->level_name);
     }
     input_shutdown();
-    printf("\033[2J\033[H Congratulations!");
+    if(game.moves < save->best_moves || save->best_moves == 0){
+        save->best_moves = game.moves;
+    }
+    
+    printf("\033[2J\033[HCongratulations!\nMoves: %d", game.moves);
     getchar();
     return;
 }

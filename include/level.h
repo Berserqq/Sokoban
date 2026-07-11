@@ -15,9 +15,8 @@ typedef struct
     char cells[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
     char map[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
 
-    char name[64];
+    char name[MAX_LEVEL_NAME];
     int passed;
-    int best_moves;
 
     int total_crates;
 }Level;

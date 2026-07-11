@@ -5,7 +5,8 @@
 #include "../include/game.h"
 
 
-void render_level(Game *game){
+
+void render_level(Game *game, int key){
     char info[2][16];
     snprintf(info[0], sizeof(info[1]), "   Moves: %d", game->moves);
     snprintf(info[1], sizeof(info[2]), "   Boxes: %d/%d", crates_on_targets(game), game->level.total_crates);
@@ -19,7 +20,7 @@ void render_level(Game *game){
         for (int x = 0; x < game->level.width; x++){
             switch (game->level.cells[y][x])
             {
-                case '@': printf(ANSI_ORANGE "@" ANSI_RESET); break;
+                case '@': printf( "%s@" ANSI_RESET, (game->level.map[y][x] == 'x') ? ANSI_RED : ANSI_ORANGE); break;
                 case '$': printf(ANSI_YELLOW "$" ANSI_RESET); break;
                 case 'x': printf(ANSI_RED "x" ANSI_RESET); break;
                 case 'O': printf(ANSI_GREEN "O" ANSI_RESET); break;
@@ -30,6 +31,7 @@ void render_level(Game *game){
         if(y < 2){
             printf("%s", info[y]);
         }
+        
         putchar('\n');
     }
 

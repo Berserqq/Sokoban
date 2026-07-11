@@ -1,1 +1,8 @@
-Level 06 - Tutorial
+Level 06 - Medium
+########
+#xx    #
+#xx$ $ #
+#$#$$$##
+#xx$ $@#
+#xx    #
+########

@@ -11,6 +11,6 @@
 #define ANSI_RESET  "\033[0m"
 
 
-void render_level(Game *game);
+void render_level(Game *game, int key);
 
 #endif
