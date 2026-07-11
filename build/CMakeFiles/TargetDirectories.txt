@@ -1,3 +1,0 @@
-/home/berserq/Documents/GitHub/Sokoban/build/CMakeFiles/sokoban.dir
-/home/berserq/Documents/GitHub/Sokoban/build/CMakeFiles/edit_cache.dir
-/home/berserq/Documents/GitHub/Sokoban/build/CMakeFiles/rebuild_cache.dir

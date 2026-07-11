@@ -1,15 +1,55 @@
-#include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <dirent.h>
 #include <string.h>
 #include <ctype.h>
 
 #include "../include/menu.h"
-#include "../include/level.h"
+#include "../include/game.h"
+#include "../include/render.h"
 
-//chat
-int get_levels(LevelEntry levels[]){
+int main_menu(){
+    // printf("1. Select level\n2. Quit\n");
+    // char select = getchar();
+    // switch (select)
+    // {
+    //     case '1': select_level(); break;
+    //     case '2': exit(0);
+    //     default: break;
+    // }
+}
 
+int select_level(MenuLevels levels[MAX_LEVELS]){
+    int level_count = get_levels(levels);
+
+    int key;
+    int valid_input = 0;
+    do{
+        printf("\033[2J");
+        printf("\033[H");
+
+        printf("====== SELECT LEVEL ======\n\n");
+
+        for (int i = 0; i < level_count; i++)
+        {
+            printf("%d. %s\n",i+1, levels[i].name);
+        }
+        printf("\nChoose level number (1-%d)\n", level_count);
+
+        if(scanf("%d", &key) == 1){
+            if(key >= 1 && key <= level_count){
+                valid_input = 1;
+            }
+        }
+        else{
+            getchar();
+        }
+    }while(!valid_input);
+
+    return key-1;
+}
+
+int get_levels(MenuLevels levels[MAX_LEVELS]){
     DIR *dir = opendir("../levels");
 
     if(dir == NULL){
@@ -23,28 +63,32 @@ int get_levels(LevelEntry levels[]){
     
     while ((entry = readdir(dir)) != NULL)
     {
-        char *ext = strchr(entry->d_name, '.');
-        if (ext == NULL || strcmp(ext, ".txt") != 0)
-            continue;
-        
+        char *extension = strchr(entry->d_name, '.');
+        if (extension == NULL || strcmp(extension, ".txt") != 0) continue;
+            
         snprintf(levels[count].path, MAX_LEVEL_PATH, "../levels/%s", entry->d_name);
-        strcpy(levels[count].name, entry->d_name);
-        levels[count].name[strlen(levels[count].name) - 4] = '\0';
+
+        FILE *file = fopen(levels[count].path,"r");
+        if(file == NULL) continue;
+
+        char line[MAX_LEVEL_NAME + 2];
+        if (fgets(line, sizeof(line), file) != NULL) line[strcspn(line, "\r\n")] = '\0';
+        strcpy(levels[count].name, line);
 
         count++;
-
         if(count >= MAX_LEVELS)
             break;
     }
-    qsort(levels, count, sizeof(LevelEntry), compare_levels);
+
     closedir(dir);
+    qsort(levels, count, sizeof(MenuLevels), compare_levels);
     return count;
 }
 
 int compare_levels(const void *a, const void *b)
 {
-    const LevelEntry *level1 = a;
-    const LevelEntry *level2 = b;
+    const MenuLevels *level1 = a;
+    const MenuLevels *level2 = b;
 
     int num1 = 0;
     int num2 = 0;
@@ -53,24 +97,4 @@ int compare_levels(const void *a, const void *b)
     sscanf(level2->name, "Level %d", &num2);
 
     return num1 - num2;
-}
-
-int select_level(LevelEntry levels[], int level_count){
-
-    int key;
-    printf("\033[2J");
-    printf("\033[H");
-    printf("====== SELECT LEVEL ======\n\n");
-
-    for (int i = 0; i < level_count; i++)
-    {
-        printf("%d. %s\n",i+1, levels[i].name);
-    }
-
-    printf("\nW/S - Select\n");
-    printf("Enter - Play\n");
-
-    scanf("%d", &key);
-
-    return key-1;
 }

@@ -1,22 +1,28 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#define MAX_WIDTH 30
-#define MAX_HEIGHT 20
-#define MAX_LEVEL_NAME 71
+#define MAX_LEVEL_HEIGHT 20
+#define MAX_LEVEL_WIDTH 30
+#define MAX_LEVEL_NAME 64
+#define MAX_LEVEL_PATH 128
+
 
 typedef struct 
 {
     int width;
     int height;
-    char cells[MAX_HEIGHT][MAX_WIDTH];
-    char previous_cells[MAX_HEIGHT][MAX_WIDTH];
-    char map[MAX_HEIGHT][MAX_WIDTH];
-    char name[MAX_LEVEL_NAME];
 
-} Level;
+    char cells[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
+    char map[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
 
+    char name[64];
+    int passed;
+    int best_moves;
 
-int level_load(Level *level, const char *filename);
+    int total_crates;
+}Level;
+
+int level_load(Level *level, char *filename);
+int crates_on_map(Level *level);
 
 #endif

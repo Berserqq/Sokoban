@@ -10,7 +10,7 @@ typedef enum{
     KEY_ENTER,
     KEY_ESCAPE,
     KEY_LAST_MOVE
-} Direction;
+} Input;
 
 int player_input(void);
 void input_init(void);

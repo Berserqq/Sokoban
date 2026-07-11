@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/sokoban.dir/src/main.c.o CMakeFiles/sokoban.dir/src/game.c.o CMakeFiles/sokoban.dir/src/input.c.o CMakeFiles/sokoban.dir/src/level.c.o CMakeFiles/sokoban.dir/src/menu.c.o CMakeFiles/sokoban.dir/src/render.c.o -o sokoban 
