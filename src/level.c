@@ -7,12 +7,18 @@ int level_load(Level *level, char *filename){
     FILE *file = fopen(filename, "r");
     if (file == NULL) return 1;
 
-    char line[MAX_LEVEL_WIDTH + 2];
-
+    char line[MAX_LEVEL_NAME + 2];
     level->width = 0;
     level->height = 0;
+    fgets(line, sizeof(line),file);
 
-    strcpy(level->name, fgets(line, sizeof(line),file));
+    if(strlen(line) > MAX_LEVEL_NAME){
+        while (fgetc(file) != '\n');
+    }
+    
+    line[MAX_LEVEL_NAME-1] = '\n';
+
+    strcpy(level->name, line);
 
     while(fgets(line, sizeof(line),file)){
         line[strcspn(line, "\n")] = '\0';

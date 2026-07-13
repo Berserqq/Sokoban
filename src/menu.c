@@ -13,8 +13,8 @@ int select_level(MenuLevels levels[MAX_LEVELS], int passed[MAX_LEVELS], int leve
     int key;
     int valid_input = 0;
     do{
-        printf("\033[2J");
-        printf("\033[H");
+        // printf("\033[2J");
+        // printf("\033[H");
 
         printf("====== SELECT LEVEL ======\n\n");
 
@@ -63,6 +63,8 @@ int get_levels(MenuLevels levels[MAX_LEVELS]){
 
         char line[MAX_LEVEL_NAME + 2];
         if (fgets(line, sizeof(line), file) != NULL) line[strcspn(line, "\r\n")] = '\0';
+        //Защита от слишком длинного имени
+        line[MAX_LEVEL_NAME-1] = '\0';
         strcpy(levels[count].name, line);
 
         count++;

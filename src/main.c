@@ -22,7 +22,7 @@ int main(){
     {
         for(int i = 0; i < level_count; i++) passed[i] = (save[i].best_moves > 0) ? 1 : 0;
         int selected = select_level(levels, passed, level_count);
-        strcpy(save[selected].level_name, levels[selected].name);
+        // strcpy(save[selected].level_name, levels[selected].name);
         start_game(levels[selected].path, &save[selected]);
         save_game(save);
     }
@@ -34,7 +34,6 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
     level_load(&game.level, level_path);
 
     input_init();
-    render_level(&game, -1);
     player_position(&game);
 
     while (game.level.total_crates > crates_on_targets(&game))
@@ -50,7 +49,6 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
         }
         move_player(&game, key);
         render_level(&game, key);
-        printf("%s\n", save->level_name);
     }
     input_shutdown();
     if(game.moves < save->best_moves || save->best_moves == 0){
