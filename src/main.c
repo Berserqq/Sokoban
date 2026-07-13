@@ -53,7 +53,7 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
             last_move(&game);
         }
         move_player(&game, key);
-        render_level(&game, key);
+        render_level(&game);
     }
     input_shutdown();
     if(game.moves < save->best_moves || save->best_moves == 0){

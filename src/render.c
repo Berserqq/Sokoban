@@ -11,7 +11,7 @@
 
 
 
-void render_level(Game *game, int key){
+void render_level(Game *game){
     char info[2][16];
     snprintf(info[0], sizeof(info[1]), "   Moves: %d", game->moves);
     snprintf(info[1], sizeof(info[2]), "   Boxes: %d/%d", crates_on_targets(game), game->level.total_crates);

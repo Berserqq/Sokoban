@@ -12,10 +12,15 @@
 #include "game.h"
 #include "menu.h"
 
-
+/** 
+ * @brief Имя бинарного файла для записи и чтения прогресса
+ */
 #define SAVE_FILE "save.dat"
 
-
+/**
+ * @struct Save
+ * @brief Структура, хранящая имя уровня и показатель лучшего результата уровня
+ */
 typedef struct
 {
     char level_name[MAX_LEVEL_NAME];
