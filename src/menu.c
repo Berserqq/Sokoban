@@ -14,7 +14,6 @@
 #include "../include/render.h"
 
 int select_level(MenuLevels levels[MAX_LEVELS], int passed[MAX_LEVELS], int level_count){
-
     int key;
     int valid_input = 0;
     do{

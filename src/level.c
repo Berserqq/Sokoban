@@ -8,9 +8,23 @@
 
 #include "../include/level.h"
 
+static int total_crates(Level *level){
+        int crates = 0;
+
+    for(int y = 0; y < level->height; y++){
+        for(int x = 0; x < level->width; x++){
+            if(level->map[y][x] == 'x'){
+                crates++;
+            }
+        }
+    }
+    level->total_crates = crates;
+    return 0;
+}
+
 void level_load(Level *level, char *filename){
     FILE *file = fopen(filename, "r");
-    if (file == NULL) return 1;
+    if (file == NULL) return;
 
     char line[MAX_LEVEL_NAME + 2];
     level->width = 0;
@@ -44,19 +58,6 @@ void level_load(Level *level, char *filename){
     }
     fclose(file);
     total_crates(level);
-    return 0;
+    return;
 }
 
-int total_crates(Level *level){
-        int crates = 0;
-
-    for(int y = 0; y < level->height; y++){
-        for(int x = 0; x < level->width; x++){
-            if(level->map[y][x] == 'x'){
-                crates++;
-            }
-        }
-    }
-    level->total_crates = crates;
-    return 0;
-}

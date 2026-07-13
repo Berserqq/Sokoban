@@ -29,6 +29,7 @@ typedef struct
      * Изменяется при передвижении игрока
      */
     char cells[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
+    
     /** @brief Статическая карта игрового поля
      * Создается при загрузке и не меняется в процессе игры.
      * Содержит только данные о положении стен и целей
@@ -54,6 +55,5 @@ typedef struct
  * 
  */
 void level_load(Level *level, char *filename);
-int total_crates(Level *level);
 
 #endif
