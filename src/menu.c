@@ -38,8 +38,8 @@ int select_level(MenuLevels levels[MAX_LEVELS], int passed[MAX_LEVELS], int leve
 
         for (int i = 0; i < level_count; i++)
         {
-            if(passed[i]) printf(ANSI_GREEN "%d. %s" ANSI_RESET,i+1, levels[i].name);
-            else printf("%d. %s",i+1, levels[i].name);
+            if(passed[i]) printf(ANSI_GREEN "%-2d| %-20s| %d" ANSI_RESET,i+1, levels[i].name, levels[i].best_moves);
+            else printf("%-2d| %-20s| %d",i+1, levels[i].name, levels[i].best_moves);
             putchar('\n');
         }
         printf("\nChoose level number (1-%d)\n", level_count);

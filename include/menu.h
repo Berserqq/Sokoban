@@ -21,6 +21,7 @@ typedef struct
 {
     char path[MAX_LEVEL_PATH];
     char name[MAX_LEVEL_NAME];
+    int best_moves;
 }MenuLevels;
 
 /** @brief Отображает меню уровней и обрабатывает ввод игрока для выбора.

@@ -25,8 +25,12 @@ int main(){
     int passed[MAX_LEVELS];
     while (1)
     {
-        for(int i = 0; i < level_count; i++) passed[i] = (save[i].best_moves > 0) ? 1 : 0;
+        for(int i = 0; i < level_count; i++) {
+            passed[i] = (save[i].best_moves > 0) ? 1 : 0;
+            levels[i].best_moves = save[i].best_moves;
+        }
         int selected = select_level(levels, passed, level_count);
+        
         // strcpy(save[selected].level_name, levels[selected].name);
         start_game(levels[selected].path, &save[selected]);
         save_game(save);
