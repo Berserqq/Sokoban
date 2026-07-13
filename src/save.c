@@ -22,13 +22,17 @@
 void load_save(Save save[MAX_LEVELS], MenuLevels levels[MAX_LEVELS], int level_count){
     FILE *file = fopen(SAVE_FILE, "rb");
     if(file != NULL){
+        //Считывает заданное количество элементов данных из файлового потока в буфер
         fread(save, sizeof(Save), MAX_LEVELS, file);
         fclose(file);
     }
     else{
+        //Заполняет структуру save нулями, так как иначе может содержать мусор от предыдущего владельца память
         memset(save, 0, sizeof(Save) * MAX_LEVELS);
+        //Цикл, заполняющий имена, и зануляющий статистику.
         for(int i = 0; i < level_count; i++){
-            strncpy(save[i].level_name, levels[i].name, MAX_LEVEL_NAME - 1);
+            //strncpy копирует заданное количество символов, в отличие от strcpy. Используется во 
+            strcpy(save[i].level_name, levels[i].name);
             save[i].best_moves = 0;
         }
     }
