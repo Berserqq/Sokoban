@@ -1,3 +1,8 @@
+/**
+ * @file input.c
+ * @brief 
+ */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <termios.h>

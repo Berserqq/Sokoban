@@ -1,3 +1,8 @@
+/**
+ * @file level.c
+ * @brief 
+ */
+
 #include <stdio.h>
 #include <string.h>
 
@@ -15,7 +20,7 @@ int level_load(Level *level, char *filename){
     if(strlen(line) > MAX_LEVEL_NAME){
         while (fgetc(file) != '\n');
     }
-    
+
     line[MAX_LEVEL_NAME-1] = '\n';
 
     strcpy(level->name, line);

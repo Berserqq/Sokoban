@@ -1,3 +1,8 @@
+/**
+ * @file main.c
+ * @brief 
+ */
+
 #include <stdio.h>
 #include <string.h>
 

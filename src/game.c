@@ -1,3 +1,8 @@
+/**
+ * @file game.c
+ * @brief
+ */
+
 #include <stdio.h>
 #include <string.h>
 

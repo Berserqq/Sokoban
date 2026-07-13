@@ -1,11 +1,12 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "../include/save.h"
 /**
  * @file save.c
  * @brief 
  */
+
+#include <stdio.h>
+#include <string.h>
+
+#include "../include/save.h"
 
 /**
  * @brief Загружает сохранение из бинарного файла на диске.
