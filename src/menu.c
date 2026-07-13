@@ -13,6 +13,20 @@
 #include "../include/game.h"
 #include "../include/render.h"
 
+static int compare_levels(const void *a, const void *b)
+{
+    const MenuLevels *level1 = a;
+    const MenuLevels *level2 = b;
+
+    int num1 = 0;
+    int num2 = 0;
+
+    sscanf(level1->name, "Level %d", &num1);
+    sscanf(level2->name, "Level %d", &num2);
+
+    return num1 - num2;
+}
+
 int select_level(MenuLevels levels[MAX_LEVELS], int passed[MAX_LEVELS], int level_count){
     int key;
     int valid_input = 0;
@@ -81,16 +95,3 @@ int get_levels(MenuLevels levels[MAX_LEVELS]){
     return count;
 }
 
-int compare_levels(const void *a, const void *b)
-{
-    const MenuLevels *level1 = a;
-    const MenuLevels *level2 = b;
-
-    int num1 = 0;
-    int num2 = 0;
-
-    sscanf(level1->name, "Level %d", &num1);
-    sscanf(level2->name, "Level %d", &num2);
-
-    return num1 - num2;
-}
