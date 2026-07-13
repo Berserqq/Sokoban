@@ -8,7 +8,7 @@
 
 #include "../include/level.h"
 
-int level_load(Level *level, char *filename){
+void level_load(Level *level, char *filename){
     FILE *file = fopen(filename, "r");
     if (file == NULL) return 1;
 
@@ -43,11 +43,11 @@ int level_load(Level *level, char *filename){
         level ->height++;
     }
     fclose(file);
-    crates_on_map(level);
+    total_crates(level);
     return 0;
 }
 
-int crates_on_map(Level *level){
+int total_crates(Level *level){
         int crates = 0;
 
     for(int y = 0; y < level->height; y++){

@@ -1,6 +1,9 @@
 /**
  * @file level.h
- * @brief 
+ * @brief Заголовочный файл для загрузки и хранения параметров загружаемого уровня.
+ * 
+ * Определяет константы ограничения размеров карты, размера названия уровня и пути.
+ * Определяет функции загрузки уровня и поиска целей на карте
  */
 
 #ifndef LEVEL_H
@@ -11,22 +14,46 @@
 #define MAX_LEVEL_NAME 64
 #define MAX_LEVEL_PATH 128
 
-
+/**
+ * @struct Level
+ * @brief Структура, хранящая состояние карты во время игры и статическую карту при загрузке
+ */
 typedef struct 
 {
+    /** @brief Ширина загруженного уровня */
     int width;
+    /** @brief Высота загруженного уровня */
     int height;
 
+    /** @brief Динамическая карта игрового поля
+     * Изменяется при передвижении игрока
+     */
     char cells[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
+    /** @brief Статическая карта игрового поля
+     * Создается при загрузке и не меняется в процессе игры.
+     * Содержит только данные о положении стен и целей
+     */
     char map[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
 
+    /** @brief Название уровня
+     * Определяется в первой строке читаемого файла
+     */
     char name[MAX_LEVEL_NAME];
+    /** @brief Флаг прохождения уровня */
     int passed;
-
+    /** @brief Количество ящиков на уровне */
     int total_crates;
 }Level;
 
-int level_load(Level *level, char *filename);
-int crates_on_map(Level *level);
+/** @brief Загружает данные уровня из текстового файла.
+ * 
+ * Открывает файл, считывает название из первой строки, считывает матрицу уровня и записывает ее в 'cells' и 'map'.
+ * 
+ * @param [in, out] level Указатель на структуру @ref Level для заполнения.
+ * @param [in] filename Путь к текстовому файлу с конфигурацией уровня.
+ * 
+ */
+void level_load(Level *level, char *filename);
+int total_crates(Level *level);
 
 #endif

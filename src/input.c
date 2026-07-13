@@ -1,6 +1,6 @@
 /**
  * @file input.c
- * @brief 
+ * @brief Реализация системы ввода
  */
 
 #include <stdio.h>
@@ -31,20 +31,27 @@ int player_input(void){
             return KEY_LAST_MOVE;
     }
 }
-//chat
+//Сохранение дефолтных настроек терминала
 static struct termios old_termios;
 
 void input_init(void){
     struct termios new_termios;
-
+    //Заправшивает текущие настройки терминала, и записывает их в old_termios
     tcgetattr(STDIN_FILENO, &old_termios);
+
     new_termios = old_termios;
 
+    /* Поле c_lflag хранит локальные флаги терминала
+    Флаги ICANON и ECHO отвечают за ожидание нажатия Enter и вывод ввода в консоль
+    (ICANON | ECHO) - объединение битов
+    ~ инвертирует биты, создает маску
+    &= применяет маску, выключает настройки
+    */
     new_termios.c_lflag &= ~(ICANON | ECHO);
+    //Установка настроек терминала, применяет их немедленно
     tcsetattr(STDIN_FILENO, TCSANOW, &new_termios);
 }
 
 void input_shutdown(void){
     tcsetattr(STDIN_FILENO, TCSANOW, &old_termios);
 }
-//chat
