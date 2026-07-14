@@ -12,11 +12,9 @@
 #include "game.h"
 #include "menu.h"
 
-/** 
- * @brief Имя бинарного файла для записи и чтения прогресса
- */
-#define SAVE_FILE "save.dat"
-#define SAVE_MAGIC "SOKO"
+/** @brief Сигнатура файла сохранения */
+#define SAVE_FILE "save.dat" 
+#define SAVE_MAGIC "SOKO" 
 #define SAVE_MAGIC_LEN 4
 #define SAVE_VERSION 1
 
