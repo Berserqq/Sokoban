@@ -31,8 +31,7 @@ int select_level(MenuLevels levels[MAX_LEVELS], int passed[MAX_LEVELS], int leve
     int key;
     int valid_input = 0;
     do{
-        printf("\033[2J");
-        printf("\033[H");
+        system("clear");
 
         printf("====== SELECT LEVEL ======\n\n");
 

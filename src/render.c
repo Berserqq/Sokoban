@@ -16,8 +16,8 @@ void render_level(Game *game){
     snprintf(info[0], sizeof(info[1]), "   Moves: %d", game->moves);
     snprintf(info[1], sizeof(info[2]), "   Boxes: %d/%d", crates_on_targets(game), game->level.total_crates);
 
-    printf("\033[2J");
-    printf("\033[H");
+    system("clear");
+    
 
     printf("%s", game->level.name);
     for (int y = 0; y < game->level.height; y++)
