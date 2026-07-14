@@ -59,7 +59,8 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
     //Безопасная загрузка уровня.
     if(level_load(&game.level, level_path)){
         printf("Invalid level\n");
-        getchar();
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
         return;
     }
     //Инициализвация системы ввода
@@ -93,6 +94,7 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
         save->best_moves = game.moves;
     }
     
+    //Вывод поздравления
     system("clear");
     printf("=========================\n");
     printf("     CONGRATULATIONS!    \n");
@@ -103,6 +105,5 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
     }
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
-    getchar();
     return;
 }
