@@ -1,6 +1,6 @@
 /**
  * @file save.c
- * @brief 
+ * @brief Реализация системы сохранений
  */
 
 #include <stdio.h>
