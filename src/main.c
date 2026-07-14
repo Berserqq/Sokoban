@@ -33,7 +33,7 @@ int main(){
         
         // strcpy(save[selected].level_name, levels[selected].name);
         start_game(levels[selected].path, &save[selected]);
-        save_game(save);
+        save_game(save, level_count);
     }
 }
 

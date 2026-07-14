@@ -37,10 +37,11 @@ typedef struct
 {
     char magic[SAVE_MAGIC_LEN]; /**< Должно быть "SOKO" */
     int version; /**< Версия формата сохранения */
+    int record_count; /**< Количество записей */
 } SaveHeader;
 
 
 void load_save(Save save[MAX_LEVELS], MenuLevels levels[MAX_LEVELS], int level_count);
-void save_game(Save save[MAX_LEVELS]);
+void save_game(Save save[MAX_LEVELS], int level_count);
 
 #endif
