@@ -57,12 +57,7 @@ void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
     memset(&game, 0, sizeof(game));
     
     //Безопасная загрузка уровня.
-    if(level_load(&game.level, level_path)){
-        printf("Invalid level\n");
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
-        return;
-    }
+    if(level_load(&game.level, level_path)) return;
     //Инициализвация системы ввода
     input_init();
     //Нахождение координат игрока
