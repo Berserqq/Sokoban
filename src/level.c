@@ -1,6 +1,6 @@
 /**
  * @file level.c
- * @brief 
+ * @brief Реализация загрузки и хранения уровня
  */
 
 #include <stdio.h>
@@ -8,7 +8,7 @@
 
 #include "../include/level.h"
 
-static int total_crates(Level *level){
+static void total_crates(Level *level){
         int crates = 0;
 
     for(int y = 0; y < level->height; y++){
@@ -19,28 +19,35 @@ static int total_crates(Level *level){
         }
     }
     level->total_crates = crates;
-    return 0;
 }
 
-void level_load(Level *level, char *filename){
+int level_load(Level *level, char *filename){
     FILE *file = fopen(filename, "r");
-    if (file == NULL) return;
+    if (file == NULL) return 1;
 
     char line[MAX_LEVEL_NAME + 2];
     level->width = 0;
     level->height = 0;
+
+    //Считывание первой строки для записи названия уровня
     fgets(line, sizeof(line),file);
 
+    //Очистка строки, если выходит за пределы максимального названия уровня
     if(strlen(line) > MAX_LEVEL_NAME){
         while (fgetc(file) != '\n');
     }
-
+    
     line[MAX_LEVEL_NAME-1] = '\n';
-
     strcpy(level->name, line);
 
+    //Цикл выгрузки уровня из .txt в матрицу уровня
     while(fgets(line, sizeof(line),file)){
         line[strcspn(line, "\n")] = '\0';
+
+        if(strlen(line) > MAX_LEVEL_WIDTH){
+            fclose(file);
+            return 1;
+        }
 
         if(level->width < strlen(line))
             level->width = strlen(line);
@@ -58,6 +65,6 @@ void level_load(Level *level, char *filename){
     }
     fclose(file);
     total_crates(level);
-    return;
+    return 0;
 }
 

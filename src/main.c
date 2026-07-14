@@ -40,7 +40,12 @@ int main(){
 void start_game(char level_path[MAX_LEVEL_PATH], Save *save){
     Game game;
     memset(&game, 0, sizeof(game));
-    level_load(&game.level, level_path);
+    
+    if(level_load(&game.level, level_path)){
+        printf("Invalid level\n");
+        getchar();
+        return;
+    }
 
     input_init();
     player_position(&game);

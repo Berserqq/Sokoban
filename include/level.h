@@ -53,7 +53,8 @@ typedef struct
  * @param [in, out] level Указатель на структуру @ref Level для заполнения.
  * @param [in] filename Путь к текстовому файлу с конфигурацией уровня.
  * 
+ * @return int Флаг загрузки уровня. Если уровень загружен не правильно - возвращает 1. Иначе 0.
  */
-void level_load(Level *level, char *filename);
+int level_load(Level *level, char *filename);
 
 #endif
