@@ -1,6 +1,6 @@
 /**
  * @file main.c
- * @brief 
+ * @brief Точка входа в игру Sokoban
  */
 
 #include <stdio.h>
@@ -12,22 +12,32 @@
 #include "../include/menu.h"
 #include "../include/save.h"
 
-void start_game(char level_path[MAX_LEVELS], Save *save);
+/**
+ * @brief Запускает игровой сеанс для конкретного уровня.
+ * 
+ * @param[in] level_path Путь к файлу уровня.
+ * @param[in,out] save   Указатель на структуру сохранения для записи нового рекорда.
+ */
+void start_game(char level_path[MAX_LEVEL_PATH], Save *save);
 
-int main(){
+int main(void){
     
     MenuLevels levels[MAX_LEVELS];
     Save save[MAX_LEVELS];
+
+    //Загружаем список уровней, имена и пути из директории ../levels
     int level_count = get_levels(levels);
-    
+
+    //Загружаем сохранение с диска
     load_save(save, levels, level_count);
 
     int passed[MAX_LEVELS];
+
+    //Основной цикл
     while (1)
     {
         for(int i = 0; i < level_count; i++) {
             passed[i] = (save[i].best_moves > 0) ? 1 : 0;
-            levels[i].best_moves = save[i].best_moves;
         }
         int selected = select_level(levels, passed, level_count);
         
