@@ -14,4 +14,5 @@ add_executable(sokoban
     src/level.c
     src/menu.c
     src/render.c
+    src/save.c
 )
